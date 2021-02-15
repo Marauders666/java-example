@@ -4,19 +4,37 @@ import component.*;
 
 import java.util.*;
 
-public abstract class AbstractDashboard implements Dashboard{
+public abstract class AbstractDashboard implements Dashboard {
 
     private List<DashboardComponent> components = new ArrayList<>();
+    private int idDashboard;
+    private String name;
+
+    public void setIdDashboard(int idDashboard) {
+        this.idDashboard = idDashboard;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getIdDashboard() {
+        return idDashboard;
+    }
+
+    public String getName() {
+        return name;
+    }
 
 
     @Override
     public void redirect(String dashboardUrl) {
-
+        System.out.println("redirect to " + dashboardUrl);
     }
 
     @Override
     public void search(String search) {
-
+        System.out.println("search to" + search);
     }
 
     protected abstract void render();
@@ -29,7 +47,7 @@ public abstract class AbstractDashboard implements Dashboard{
 
     @Override
     public void stop() {
-
+        System.out.println("Stop");
     }
 
     @Override
@@ -40,5 +58,28 @@ public abstract class AbstractDashboard implements Dashboard{
     @Override
     public void removeComponent(DashboardComponent component) {
         components.remove(component);
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    @Override
+    public void sort() {
+        Collections.sort(components);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AbstractDashboard that = (AbstractDashboard) o;
+        return idDashboard == that.idDashboard && components.equals(that.components) && name.equals(that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(components, idDashboard, name);
     }
 }
