@@ -7,30 +7,10 @@ public class EditableDashboard extends AbstractDashboard {
     }
 
     @Override
-    public String getClassName() {
-        return "EditableDashboard";
+    protected Object clone() throws CloneNotSupportedException {
+        EditableDashboard dash = new EditableDashboard();
+        this.components.forEach(dash::addComponent);
+        return dash;
     }
 
-    public static class Builder {
-
-        private final EditableDashboard newDash;
-
-        public Builder() {
-            newDash = new EditableDashboard();
-        }
-
-        public Builder idDashboard(int idDashboard) {
-            newDash.setIdDashboard(idDashboard);
-            return this;
-        }
-
-        public Builder name(String name) {
-            newDash.setName(name);
-            return this;
-        }
-
-        public EditableDashboard build() {
-            return newDash;
-        }
-    }
 }

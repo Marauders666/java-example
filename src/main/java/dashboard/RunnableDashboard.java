@@ -7,30 +7,10 @@ public class RunnableDashboard extends AbstractDashboard {
     }
 
     @Override
-    public String getClassName() {
-        return "RunnableDashboard";
+    protected Object clone() throws CloneNotSupportedException {
+        RunnableDashboard dash = new RunnableDashboard();
+        this.components.forEach(dash::addComponent);
+        return dash;
     }
 
-    public static class Builder {
-
-        private final RunnableDashboard newDash;
-
-        public Builder() {
-            newDash = new RunnableDashboard();
-        }
-
-        public RunnableDashboard.Builder idDashboard(int idDashboard) {
-            newDash.setIdDashboard(idDashboard);
-            return this;
-        }
-
-        public RunnableDashboard.Builder name(String name) {
-            newDash.setName(name);
-            return this;
-        }
-
-        public RunnableDashboard build() {
-            return newDash;
-        }
-    }
 }

@@ -5,7 +5,7 @@ import java.util.Objects;
 public abstract class AbstractDashboardComponent implements DashboardComponent {
     private int x;
     private int y;
-    private boolean vision = true;
+    private boolean visible = true;
     private final int id;
 
     public AbstractDashboardComponent(int x, int y, int id) {
@@ -14,10 +14,10 @@ public abstract class AbstractDashboardComponent implements DashboardComponent {
         this.id = id;
     }
 
-    public AbstractDashboardComponent(int x, int y, boolean vision, int id) {
+    public AbstractDashboardComponent(int x, int y, boolean visible, int id) {
         this.x = x;
         this.y = y;
-        this.vision = vision;
+        this.visible = visible;
         this.id = id;
     }
 
@@ -41,17 +41,17 @@ public abstract class AbstractDashboardComponent implements DashboardComponent {
 
     @Override
     public void show() {
-        vision = true;
+        visible = true;
     }
 
     @Override
     public void hide() {
-        vision = false;
+        visible = false;
     }
 
     @Override
     public boolean isVisible() {
-        return vision;
+        return visible;
     }
 
     @Override
@@ -69,11 +69,11 @@ public abstract class AbstractDashboardComponent implements DashboardComponent {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AbstractDashboardComponent that = (AbstractDashboardComponent) o;
-        return x == that.x && y == that.y && vision == that.vision && id == that.id;
+        return x == that.x && y == that.y && visible == that.visible && id == that.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y, vision, id);
+        return Objects.hash(x, y, visible, id);
     }
 }

@@ -6,26 +6,16 @@ import java.util.*;
 
 public abstract class AbstractDashboard implements Dashboard {
 
-    private List<DashboardComponent> components = new ArrayList<>();
+    protected List<DashboardComponent> components = new ArrayList<>();
     private int idDashboard;
-    private String name;
 
     public void setIdDashboard(int idDashboard) {
         this.idDashboard = idDashboard;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getIdDashboard() {
         return idDashboard;
     }
-
-    public String getName() {
-        return name;
-    }
-
 
     @Override
     public void redirect(String dashboardUrl) {
@@ -75,11 +65,11 @@ public abstract class AbstractDashboard implements Dashboard {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AbstractDashboard that = (AbstractDashboard) o;
-        return idDashboard == that.idDashboard && components.equals(that.components) && name.equals(that.name);
+        return idDashboard == that.idDashboard && components.equals(that.components);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(components, idDashboard, name);
+        return Objects.hash(components, idDashboard);
     }
 }

@@ -18,9 +18,5 @@ public interface Dashboard extends Cloneable {
 
     void sort();
 
-    void setName(String name);
-
     void setIdDashboard(int idDashboard);
-
-    String getClassName();
 }
