@@ -1,44 +1,25 @@
 import component.*;
-import dashboard.*;
-
-import java.util.*;
 
 public class Main {
 
-    public static void main(String... args) {
+    public static void main(String... args) throws InterruptedException {
 
-        Dashboard dash = new RunnableDashboard();
+        Incrementor incrementor = new Incrementor();
 
-        AbstractDashboard dash2 = new EditableDashboard();
+        Runnable task = () -> incrementor.increment();
 
-        dash2.clone();
+        Runnable task2 = () -> incrementor.decrement();
 
-        dash.start();
+        Thread thread = new Thread(task,"myThread");
 
-        dash2.start();
+        thread.start();
 
-        dash2.stop();
+        Thread thread2 = new Thread(task2,"myThread2");
 
-
-        List<DashboardComponent> components = new ArrayList<>();
-
-
-        DashboardComponent component1 = new LabelComponent(1,1);
-        DashboardComponent component2 = new LabelComponent(2,2);
-        DashboardComponent component3 = new LabelComponent(1,1);
+        thread2.start();
 
 
-        components.add(component1);
-        components.add(component2);
-        //components.add(component3);
-
-
-        DashboardBuilder builder = new DashboardBuilder();
-
-        Dashboard result = builder.name("dash").editable().build();
-
-
-        System.out.println(components.indexOf(component3));
-
+        thread.join();
+        thread2.join();
     }
 }
